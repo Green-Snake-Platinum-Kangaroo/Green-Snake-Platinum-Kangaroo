@@ -21,7 +21,7 @@
   // set some camera attributes
   var VIEW_ANGLE = 45,
       ASPECT = WIDTH / HEIGHT,
-      NEAR = 0.1,
+      NEAR = 1,
       FAR = 10000;
 
   // get the DOM element to attach to
@@ -50,7 +50,7 @@
 
   // create the sphere's material
   var sphereMaterial = new THREE.MeshLambertMaterial({
-      color: 0xCC0000
+      color: 0x0000FF
   });
 
   // set up the sphere vars
@@ -70,15 +70,15 @@
   scene.add(camera);
 
   // create a point light
-  var pointLight = new THREE.PointLight( 0xFFFFFF );
+  var spotLight = new THREE.SpotLight( 0xFFFFFF );
 
   // set its position
-  pointLight.position.x = 10;
-  pointLight.position.y = 50;
-  pointLight.position.z = 130;
+  spotLight.position.x = 170;
+  spotLight.position.y = 330;
+  spotLight.position.z = -160;
 
   // add to the scene
-  scene.add(pointLight);
+  scene.add(spotLight);
 
   // draw!
   renderer.render(scene, camera);
