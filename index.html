@@ -11,18 +11,24 @@
 </body>
 
   <script src="js/jquery.min.js"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+  <script type="text/javascript" src="https://googledrive.com/host/0B-4noyqAgbqCTkhZRzN6ejJhM2s"></script>
+
   <script src="js/three.min.js"></script>
-  <script type="text/javascript">
+  <script src="js/clock.js"></script>
+
+<!--   <script type="text/javascript">
 
   // set the scene size
-  var WIDTH = window.innerWidth,
-      HEIGHT = window.innerHeight;
+  var width = window.innerWidth;
+  var height = window.innerHeight;
 
   // set some camera attributes
-  var VIEW_ANGLE = 45,
-      ASPECT = WIDTH / HEIGHT,
-      NEAR = 0.1,
-      FAR = 10000;
+  var view_angle = 45;
+  var aspect = width / height;
+  var near = 0.1;
+  var far = 10000;
 
   // get the DOM element to attach to
   var $container = $('#container');
@@ -30,7 +36,7 @@
   // create a WebGL renderer, camera and a scene
   var renderer = new THREE.WebGLRenderer();
 
-  var camera = new THREE.PerspectiveCamera(  VIEW_ANGLE, ASPECT, NEAR, FAR  );
+  var camera = new THREE.PerspectiveCamera(  view_angle, aspect, near, far  );
 
   var scene = new THREE.Scene();
 
@@ -38,7 +44,7 @@
   camera.position.z = 300;
 
   // start the renderer
-  renderer.setSize(WIDTH, HEIGHT);
+  renderer.setSize(width, height);
 
   // and make it pretty
   renderer.setClearColorHex(0x555753, 1.0);
@@ -48,9 +54,17 @@
   $container.append(renderer.domElement);
 
   // create the clock's material
-  var sphereMaterial = new THREE.MeshLambertMaterial({
+  var clockMaterial = new THREE.MeshLambertMaterial({
       color: 0x0000FF,
       transparent: false
+  });
+
+  var red = new THREE.MeshLambertMaterial({
+    color: 0xFF0000
+  });
+
+  var grey = new THREE.MeshLambertMaterial({
+    color: 0x22222
   });
 
   // set up the clock vars
@@ -69,7 +83,9 @@
 
   var geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded);
 
-  var clock = new THREE.Mesh(geometry, sphereMaterial);
+  var clock = new THREE.Mesh(geometry, clockMaterial);
+
+  var dial = new THREE.Mesh(geometry, clock);
 
   // add the clock to the scene
   scene.add(clock);
@@ -130,5 +146,5 @@
 
   animate(new Date().getTime());
 
-  </script>
+  </script> -->
 </html>
