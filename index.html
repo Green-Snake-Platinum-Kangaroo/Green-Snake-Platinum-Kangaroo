@@ -54,9 +54,9 @@
   });
 
   // set up the sphere vars
-  var radius = 70;
-  var segments = 16;
-  var rings = 16;
+  var radius = 50;
+  var segments = 50;
+  var rings = 50;
 
   // create a new mesh with sphere geometry
   var sphere = new THREE.Mesh(
@@ -79,6 +79,27 @@
 
   // add to the scene
   scene.add(spotLight);
+
+  // enable shadows on the renderer
+  renderer.shadowMapEnabled = true;
+
+  // enable shadows for a light
+  spotLight.castShadow = true;
+
+  // enable shadows for an object
+  sphere.castShadow = true;
+  sphere.receiveShadow = true;
+
+  var planeGeo = new THREE.PlaneGeometry(200, 200, 10, 10);
+  var planeMat = new THREE.MeshLambertMaterial({color: 0xFFFFFF});
+  var plane = new THREE.Mesh(planeGeo, planeMat);
+
+  plane.rotation.x = -Math.PI/2;
+  plane.position.y = -50;
+  plane.receiveShadow = true;
+
+  scene.add(plane);
+
 
   // draw!
   renderer.render(scene, camera);
