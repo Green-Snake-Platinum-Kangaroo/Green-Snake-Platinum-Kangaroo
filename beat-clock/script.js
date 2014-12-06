@@ -1,82 +1,75 @@
 $(document).ready(function () {
 
   // Dimension Settings
-
-  // set the scene size
-  var width = window.innerWidth;
-  var height = window.innerHeight;
-
-  // set some camera attributes
-  var view_angle = 45;
-  var aspect = width / height;
-  var near = 0.1;
-  var far = 10000;
+  var width = window.innerWidth, height = window.innerHeight;
+  var angle = 45, aspect = width/height, near = 0.1, far = 10000;
 
 
+  
   // World Objects
   var scene    = new THREE.Scene();
-  var camera  = new THREE.PerspectiveCamera(view_angle, aspect, near, far);
+  var camera   = new THREE.PerspectiveCamera(angle, aspect, near, far);
   var renderer = new THREE.WebGLRenderer();
 
   var light    = new THREE.SpotLight(0xFFFFFF, 1);
   var material = new THREE.MeshLambertMaterial({color: 0xFFFFFF});
   var red      = new THREE.MeshLambertMaterial({color: 0xFF0000});
-  var grey    = new THREE.MeshLambertMaterial({color: 0x222222});
+  var grey     = new THREE.MeshLambertMaterial({color: 0x222222});
 
   var geometry = new THREE.CylinderGeometry(20, 21, 4, 48, 1, false);
-  var dial    = new THREE.Mesh(geometry, material);
+  var dial     = new THREE.Mesh(geometry, material);
 
-  var geometry = new THREE.BoxGeometry(3, 3, 3);
+  var geometry = new THREE.CubeGeometry(3, 3, 3);
   geometry.applyMatrix( new THREE.Matrix4().makeTranslation(18,0,0));
-  var mark1    = new THREE.Mesh(geometry, grey);
+  var mark1     = new THREE.Mesh(geometry, grey);
 
-  var geometry = new THREE.BoxGeometry(3, 3, 3);
+  var geometry = new THREE.CubeGeometry(3, 3, 3);
   geometry.applyMatrix( new THREE.Matrix4().makeTranslation(18,0,0));
-  var mark2    = new THREE.Mesh(geometry, grey);
+  var mark2     = new THREE.Mesh(geometry, grey);
 
-  var geometry = new THREE.BoxGeometry(3, 3, 3);
+  var geometry = new THREE.CubeGeometry(3, 3, 3);
   geometry.applyMatrix( new THREE.Matrix4().makeTranslation(18,0,0));
-  var mark3    = new THREE.Mesh(geometry, grey);
+  var mark3     = new THREE.Mesh(geometry, grey);
 
-  var geometry = new THREE.BoxGeometry(3, 3, 3);
+  var geometry = new THREE.CubeGeometry(3, 3, 3);
   geometry.applyMatrix( new THREE.Matrix4().makeTranslation(18,0,0));
-  var mark4    = new THREE.Mesh(geometry, grey);
+  var mark4     = new THREE.Mesh(geometry, grey);
 
-  var geometry = new THREE.BoxGeometry(15, 2, 2);
+  var geometry = new THREE.CubeGeometry(15, 2, 2);
   geometry.applyMatrix( new THREE.Matrix4().makeTranslation(12,0,0));
-  var second  = new THREE.Mesh(geometry, red);
+  var second   = new THREE.Mesh(geometry, red);
 
-  var geometry = new THREE.BoxGeometry(12, 1, 3);
+  var geometry = new THREE.CubeGeometry(12, 1, 3);
   geometry.applyMatrix( new THREE.Matrix4().makeTranslation(15,0,0));
-  var minute  = new THREE.Mesh(geometry, material);
+  var minute   = new THREE.Mesh(geometry, material);
 
-  var geometry = new THREE.BoxGeometry(10, 1, 4);
+  var geometry = new THREE.CubeGeometry(10, 1, 4);
   geometry.applyMatrix( new THREE.Matrix4().makeTranslation(15,0,0));
 
-  var hour    = new THREE.Mesh(geometry, material);
+  var hour     = new THREE.Mesh(geometry, material);
 
-
-
+  
+  
   // Positions
-  dial.position.x  = 0;
-  dial.position.y  = -3;
-  dial.position.z  = 0;
+  dial.position.x   = 0;
+  dial.position.y   = -3;
+  dial.position.z   = 0;
 
-  mark1.position.x  = 0;
-  mark1.position.y  = 0;
-  mark1.position.z  = 0;
+  mark1.position.x   = 0;
+  mark1.position.y   = 0;
+  mark1.position.z   = 0;
 
-  mark2.position.x  = -18;
-  mark2.position.y  = 0;
-  mark2.position.z  = -18;
+  mark2.position.x   = -18;
+  mark2.position.y   = 0;
+  mark2.position.z   = -18;
 
-  mark3.position.x  = -36;
-  mark3.position.y  = 0;
-  mark3.position.z  = 0;
+  mark3.position.x   = -36;
+  mark3.position.y   = 0;
+  mark3.position.z   = 0;
 
-  mark4.position.x  = -18;
-  mark4.position.y  = 0;
-  mark4.position.z  = 18;
+  mark4.position.x   = -18;
+  mark4.position.y   = 0;
+  mark4.position.z   = 18;
 
   second.position.x = 0;
   second.position.y = 1.5;
@@ -86,9 +79,9 @@ $(document).ready(function () {
   // minute.position.y = 1;
   // minute.position.z = 0;
 
-  // hour.position.x  = 0;
-  // hour.position.y  = 2;
-  // hour.position.z  = 0;
+  // hour.position.x   = 0;
+  // hour.position.y   = 2;
+  // hour.position.z   = 0;
 
   light.position.x  = 0;
   light.position.y  = 100;
@@ -116,15 +109,15 @@ $(document).ready(function () {
   // Shadow
   renderer.shadowMapEnabled = true;
 
-  light.castShadow      = true;
+  light.castShadow       = true;
   light.shadowCameraNear = 1.0;
-  light.shadowDarkness  = 0.5;
+  light.shadowDarkness   = 0.5;
 
   dial.castShadow      = true;
-  dial.receiveShadow  = true;
+  dial.receiveShadow   = true;
 
   mark1.castShadow      = true;
-  mark1.receiveShadow  = true;
+  mark1.receiveShadow   = true;
 
   second.castShadow    = true;
   second.receiveShadow = true;
@@ -133,7 +126,7 @@ $(document).ready(function () {
   minute.receiveShadow = true;
 
   hour.castShadow      = true;
-  hour.receiveShadow  = true;
+  hour.receiveShadow   = true;
 
 
   // GUI
@@ -147,23 +140,23 @@ $(document).ready(function () {
 
   // Set initial time
   var now = new Date();
-  hour.rotation.y  = -((Math.PI * 2) * (now.getHours()  / 12.0))
+  hour.rotation.y   = -((Math.PI * 2) * (now.getHours()   / 12.0))
   minute.rotation.y = -((Math.PI * 2) * (now.getMinutes() / 60.0))
   second.rotation.y = -((Math.PI * 2) * (now.getSeconds() / 60.0))
   //camera.rotation.z = second.rotation.y
 
-
+    
   // Render
   renderer.setSize(width, height);
   document.body.appendChild(renderer.domElement);
 
+  
 
-
-
+  
   // Animation Tween
   var rotation_start = {angle: now.getSeconds() };
-  var rotation_end  = {angle: rotation_start.angle + 1 };
-
+  var rotation_end   = {angle: rotation_start.angle + 1 };
+  
   // dataset on hand object? or attribute directly?
   var tween1 = new TWEEN.Tween( rotation_start ).to( rotation_end, 1000 )
             .easing(TWEEN.Easing.Elastic.InOut)
@@ -175,30 +168,30 @@ $(document).ready(function () {
             })
             .onComplete( function() {
               rotation_start.angle = new Date().getSeconds();
-              rotation_end.angle  = rotation_start.angle + 1;
-
+              rotation_end.angle   = rotation_start.angle + 1;
+              
               // TODO fire off hour/minute animations here?
             })
             .start()
-
+      
       // questionable? rely on the 1000ms with 0ms delay for accuracy.
       tween1.chain(tween1);
 
-
+  
   // Update Method
   var update = function() {
     // delta here
     //second.rotation.y -= 0.0018;
     //minute.rotation.y -= 0.0018 / 60;
-    //hour.rotation.y  -= 0.0018 / 60 / 12;
+    //hour.rotation.y   -= 0.0018 / 60 / 12;
     //camera.rotation.z -= 0.0018;
     //mark.rotation.y = (new Date().getTime())/1000
     // it would be cool to see the camera rotate at second speed smooth, while the hand 'ticks' quartz style
-
+                           
     TWEEN.update();
   };
 
-
+  
   // Browser Animation Loop
   var animate = function() {
     update();
@@ -206,5 +199,6 @@ $(document).ready(function () {
     requestAnimationFrame( animate );
     renderer.render(scene, camera);
   };
-  animate();
+  
+  animate();  
 });
