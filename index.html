@@ -78,5 +78,23 @@
 
   // draw!
   renderer.render(scene, camera);
+
+  // add animation
+  var animate = function (t) {
+
+    // spin the camera in a circle
+    camera.position.x = Math.sin(t/1000)*300;
+    camera.position.y = 150;
+    camera.position.z = Math.cos(t/1000)*300;
+
+    // update lookAt on every frame
+    camera.lookAt(scene.position);
+
+    // renderer automatically clears unless autoClear = false
+    renderer.render(scene, camera);
+    window.requestAnimationFrame(animate, renderer.domElement);
+  };
+
+  animate(new Date().getTime());
   </script>
 </html>
