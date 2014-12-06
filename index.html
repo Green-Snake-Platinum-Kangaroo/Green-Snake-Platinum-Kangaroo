@@ -15,7 +15,7 @@
   <script type="text/javascript">
 
   // set the scene size
-  var WIDTH = 900,
+  var WIDTH = document.body.clientWidth,
       HEIGHT = 900;
 
   // set some camera attributes
@@ -40,6 +40,10 @@
 
   // start the renderer
   renderer.setSize(WIDTH, HEIGHT);
+
+  // and make it pretty
+  renderer.setClearColorHex(0xEEEEEE, 1.0);
+  renderer.clear();
 
   // attach the render-supplied DOM element
   $container.append(renderer.domElement);
