@@ -41,7 +41,7 @@ for(var x = 0; x < 32; x += 2) {
 		scene.add(cubes[i][j]);
 		j++;
 	}
-	row++;
+	i++;
 }
 
   // create a point light
