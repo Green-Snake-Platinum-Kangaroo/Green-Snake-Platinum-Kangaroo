@@ -1,16 +1,5 @@
-  // Dimension Settings set the scene size
-var width = window.innerWidth;
-var height = window.innerHeight;
-
-// set some camera attributes
-var view_angle = 45;
-var aspect = width / height;
-var near = 0.1;
-var far = 10000;
-
-
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(view_angle, $(window).width() / $(window).height(), 1, 1000);
+var camera = new THREE.PerspectiveCamera(50, $(window).width() / $(window).height(), 1, 1000);
 var renderer = new THREE.WebGLRenderer();
 var cubes = [];
 var controls;
@@ -22,7 +11,7 @@ for(var x = 0; x < 30; x += 2) {
 	var j = 0;
 	cubes[i] = [];
 	for(var y = 0; y < 30; y += 2) {
-		var geometry = new THREE.CubeGeometry(1.5, 1.5, 1.5);
+		var geometry = new THREE.CubeGeometry(2, 1.5, 6);
 
 		var material = new THREE.MeshPhongMaterial({
 			color: randomFairColor(),
@@ -72,27 +61,59 @@ for(var i = 0; i < 7; i++) {
 }
 
 var render = function () {
+	// console.log(dataArray);
+	analyser.getByteFrequencyData(dataArray);
+	var zeros = Array.prototype.slice.call(dataArray);
+	zeros = zeros.reduce(function(a, b){ return a + b; });
+	// console.log('zeros', zeros, 'data array ',  dataArray, 'data array length', dataArray.length);
+	// if(!zeros){
+		
+ //  }
 
-	if(typeof array === 'object' && array.length > 0) {
+	if(typeof dataArray === 'object' && dataArray.length > 0 && zeros > 0) {
+		// debugger;
+		// console.log('make the blocks move');
+		// for (var i = 0; i < bufferLength; i++) {
+  //       boost += dataArray[i];
+  //       console.log('boost', boost / 1000);
+  //   }
+  //   
+
 		var k = 0;
 		for(var i = 0; i < cubes.length; i++) {
 			for(var j = 0; j < cubes[i].length; j++) {
-				var scale = (array[k] + boost) / 30;
+				boost += dataArray[i];
+				var scale = (dataArray[k] + boost) / 3000;
+				// console.log('SCALE', scale, '[i]', i, '[j]', j);
 				cubes[i][j].scale.z = (scale < 1 ? 1 : scale);
-				k += (k < array.length ? 1 : 0);
+				// console.log('cube color before', cubes[i][j].material.color.r);
+				var red = scale * 50;
+				// console.log('red', red);
+				// console.log('cube color before', cubes[i][j].material.color.r);
+				cubes[i][j].material.color.r = scale + 100;
+				// console.log('cube color after', cubes[i][j].material.color.r);
+				// cubes[i][j].material.color.g = 0;
+				// cubes[i][j].material.color.b = 0;
+				// if(k < dataArray.length){
+				// 	k += 1;
+				// }
+				debugger;
+				if(isNaN(k)){
+					k += 0;
+				}
+				k += (k < dataArray.length ? 1 : 0);
 			}
-		}
-	}
+    }
+    boost = boost / bufferLength;
+  }
 
 	requestAnimationFrame(render);
 	controls.update();
 	renderer.render(scene, camera);
 };
-
+// console.log('data array', dataArray.length);
 render();
-
-
-renderer.setSize(width, height);
+renderer.setSize($(window).width(), $(window).height());
 
 function randomFairColor() {
 	var min = 64;
