@@ -16,10 +16,9 @@ var renderer = new THREE.WebGLRenderer({alpha:true});
 var camera = new THREE.PerspectiveCamera(view_angle, aspect, near, far);
 var scene = new THREE.Scene();
 
+// initial the boxes
 var cubes = [];
 var controls;
-
-
 
 var i = 0;
 for(var x = 0; x < 30; x += 2) {
@@ -30,9 +29,10 @@ for(var x = 0; x < 30; x += 2) {
     var material = new THREE.MeshPhongMaterial({
       color: randomFairColor(),
       ambient: 0x808080,
-      specular: 0xffffff,
-      shininess: 20,
-      reflectivity: 5.5
+      specular: 0x999999,
+      shininess: 100,
+      opacity:0.8,
+      transparent: true
     });
 		cubes[i][j] = new THREE.Mesh(geometry, material);
 		cubes[i][j].position.x = x;
@@ -43,6 +43,7 @@ for(var x = 0; x < 30; x += 2) {
 	}
 	i++;
 }
+
   // create a point light
 var light = new THREE.DirectionalLight(0xffffff);
 scene.add(light);
@@ -85,10 +86,9 @@ var render = function () {
 		for(var i = 0; i < cubes.length; i++) {
 			for(var j = 0; j < cubes[i].length; j++) {
 				boost += dataArray[i];
-				var scale = (dataArray[k] + boost) / 3000;
+				var scale = (dataArray[k] + boost) / 5000;
 				cubes[i][j].scale.z = (scale < 1 ? 1 : scale);
-				// var red = scale * 50;
-				// cubes[i][j].material.color.r = scale + 100;
+				cubes[i][j].material.color.r = scale;
 				if(isNaN(k)){
 					k += 0;
 				}
@@ -107,7 +107,7 @@ var render = function () {
 renderer.setSize(width, height);
 
 // and make it pretty
-renderer.setClearColor(0xffffff, 1.0);
+renderer.setClearColor(0xffffff, 0.7);
 renderer.clear();
 
 render();
