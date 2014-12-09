@@ -64,19 +64,20 @@ var render = function () {
 
 	analyser.getByteFrequencyData(dataArray);
 			for (var i = 0; i < bufferLength; i++) {
-	            boost += dataArray[i];
-	            // console.log('boost', boost);
-	        }
-	        boost = boost / bufferLength;
+          boost += dataArray[i];
+          // console.log('boost', boost);
+      }
+      boost = boost / bufferLength;
 
-	if(typeof array === 'object' && array.length > 0) {
+	if(typeof dataArray === 'object' && dataArray.length > 0) {
+		// debugger;
 		var k = 0;
 		for(var i = 0; i < cubes.length; i++) {
 			for(var j = 0; j < cubes[i].length; j++) {
-				var scale = (array[k] + boost) / 30;
+				var scale = (dataArray[k] + boost) / 30;
 				console.log('SCALE', scale, '[i]', i, '[j]', j);
 				cubes[i][j].scale.z = (scale < 1 ? 1 : scale);
-				k += (k < array.length ? 1 : 0);
+				k += (k < dataArray.length ? 1 : 0);
 			}
     }
   }

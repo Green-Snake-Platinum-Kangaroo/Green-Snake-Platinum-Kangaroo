@@ -52,7 +52,8 @@ var interval = window.setInterval(function() {
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 var analyser = audioCtx.createAnalyser();
 var audio  = document.querySelector('audio');
-console.log(audio);
+audio.volume = 0.15;
+// console.log(audio);
 var source = audioCtx.createMediaElementSource(audio);
 source.connect(analyser);
 //analyser.connect(distortion);
@@ -64,6 +65,7 @@ analyser.fftSize = 256;
 var bufferLength = analyser.frequencyBinCount;
 console.log(bufferLength);
 var dataArray = new Uint8Array(bufferLength);
+console.log('data array type', typeof dataArray);
 
 analyser.getFloatFrequencyData(dataArray);
 
