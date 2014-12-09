@@ -61,32 +61,44 @@ for(var i = 0; i < 7; i++) {
 }
 
 var render = function () {
-
+	// console.log(dataArray);
 	analyser.getByteFrequencyData(dataArray);
-			for (var i = 0; i < bufferLength; i++) {
-          boost += dataArray[i];
-          // console.log('boost', boost);
-      }
-      boost = boost / bufferLength;
+	var zeros = Array.prototype.slice.call(dataArray);
+	zeros = zeros.reduce(function(a, b){ return a + b; });
+	// console.log('zeros', zeros, 'data array ',  dataArray, 'data array length', dataArray.length);
+	// if(!zeros){
+		
+ //  }
 
-	if(typeof dataArray === 'object' && dataArray.length > 0) {
+	if(typeof dataArray === 'object' && dataArray.length > 0 && zeros > 0) {
 		// debugger;
+		// console.log('make the blocks move');
+		// for (var i = 0; i < bufferLength; i++) {
+  //       boost += dataArray[i];
+  //       console.log('boost', boost / 1000);
+  //   }
+  //   
+
 		var k = 0;
 		for(var i = 0; i < cubes.length; i++) {
 			for(var j = 0; j < cubes[i].length; j++) {
-				var scale = (dataArray[k] + boost) / 30;
-				console.log('SCALE', scale, '[i]', i, '[j]', j);
+				boost += dataArray[i];
+				var scale = (dataArray[k] + boost) / 3000;
+				// console.log('SCALE', scale, '[i]', i, '[j]', j);
 				cubes[i][j].scale.z = (scale < 1 ? 1 : scale);
+				// console.log('cube color before', cubes[i][j].material.color.r);
+				var red = scale * 50;
+				console.log('red', red);
+				console.log('cube color before', cubes[i][j].material.color.r);
+				cubes[i][j].material.color.r = red;
+				console.log('cube color after', cubes[i][j].material.color.r);
+				// cubes[i][j].material.color.g = 0;
+				// cubes[i][j].material.color.b = 0;
 				k += (k < dataArray.length ? 1 : 0);
 			}
     }
+    boost = boost / bufferLength;
   }
-
-  // for(var j = 0; j < bufferLength; j++){
-
-
-  	// console.log('data array', dataArray);
-  // }
 
 	requestAnimationFrame(render);
 	controls.update();
