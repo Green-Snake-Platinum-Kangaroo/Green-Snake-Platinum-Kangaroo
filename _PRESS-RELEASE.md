@@ -18,27 +18,39 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
+JavaScript Based Music Visualizer
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+Customize a music visualizer using Three.js and the HTML5 web audio API.
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+Using the uber-simple HTML5 audio tag, create and customize a music visualizer using the power of WebGL and Three.js
 
 ## Problem ##
   > Describe the problem your product solves.
+Music visualizers are hard.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+This repo makes it simple to provide your own tracks and tweak some settings to do some stuff.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+"Warning: You may gave yourself an eye cavity from all this visual sugar!"
+Fore, Met A.
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+Just paste in a track URL from SoundCloud. Put on a pair of safety glasses in case of fireworks.
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+"This visualizer was so amaze-balls that it literally launched my socks from my toenails like flying squirlz!"
+- Lee, Hyperbo
+
+
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
