@@ -88,12 +88,19 @@ var render = function () {
 				cubes[i][j].scale.z = (scale < 1 ? 1 : scale);
 				// console.log('cube color before', cubes[i][j].material.color.r);
 				var red = scale * 50;
-				console.log('red', red);
-				console.log('cube color before', cubes[i][j].material.color.r);
-				cubes[i][j].material.color.r = red;
-				console.log('cube color after', cubes[i][j].material.color.r);
+				// console.log('red', red);
+				// console.log('cube color before', cubes[i][j].material.color.r);
+				cubes[i][j].material.color.r = scale + 100;
+				// console.log('cube color after', cubes[i][j].material.color.r);
 				// cubes[i][j].material.color.g = 0;
 				// cubes[i][j].material.color.b = 0;
+				// if(k < dataArray.length){
+				// 	k += 1;
+				// }
+				debugger;
+				if(isNaN(k)){
+					k += 0;
+				}
 				k += (k < dataArray.length ? 1 : 0);
 			}
     }
