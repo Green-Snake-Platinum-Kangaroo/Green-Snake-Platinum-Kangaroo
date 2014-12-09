@@ -20,28 +20,29 @@ var scene = new THREE.Scene();
 var cubes = [];
 var controls;
 
-var i = 0;
+var row = 0;
 for(var x = 0; x < 32; x += 2) {
-  var j = 0;
-  cubes[i] = [];
+  var col = 0;
+  cubes[row] = [];
   for(var y = 0; y < 16; y += 2) {
     var geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
     var material = new THREE.MeshLambertMaterial({
       // color: {},
       ambient: 0x808080,
-      specular: 0xffffff,
-      shininess: 10,
-      reflectivity: 5.5
+      specular: 0x999999,
+      shininess: 100,
+      opacity:0.8,
+      transparent: true
     });
-		cubes[i][j] = new THREE.Mesh(geometry, material);
-		cubes[i][j].position.x = x;
-    cubes[i][j].position.y = y;
-    cubes[i][j].position.z = 0;
-    cubes[i][j].material.color.setHSL(0.5,0.8,0.8);
-		scene.add(cubes[i][j]);
-		j++;
+		cubes[row][col] = new THREE.Mesh(geometry, material);
+		cubes[row][col].position.x = x;
+    cubes[row][col].position.y = y;
+    cubes[row][col].position.z = 0;
+    cubes[row][col].material.color.setHSL(0.5,0.8,0.8);
+		scene.add(cubes[row][col]);
+		col++;
 	}
-	i++;
+	row++;
 }
 
   // create a point light
@@ -84,22 +85,22 @@ var render = function () {
 	if(typeof dataArray === 'object' && dataArray.length > 0 && zeros > 0) {
 		var k = 0;
 		var z = 127;
-		for(var i = 0; i < cubes.length; i++) {
-			for(var j = 0; j < cubes[i].length; j++) {
+		for(var row = 0; row < cubes.length; row++) {
+			for(var col = 0; col < cubes[row].length; col++) {
 				// console.log('z',dataArray[z]);
 				boost += dataArray[z];
 				var scale = (dataArray[k] + boost) / 3000;
-					cubes[i][j].material.color.setHSL(dataArray[z] / 255, 0.8, 0.8);
-					// console.log('hsl', cubes[i][j].getHSL());
-					// console.log('SCALE', scale, '[i]', i, '[j]', j);
-					// cubes[i][j].scale.z = (scale < 1 || isNaN(scale)) ? 1 : scale;
-					cubes[i][j].scale.z = (dataArray[z] / 10 < 1) ? 1 : dataArray[z] / 10;
-					// console.log('cube color before', cubes[i][j].material.color.r);
+					cubes[row][col].material.color.setHSL(dataArray[z] / 255, 0.8, 0.8);
+					// console.log('hsl', cubes[i][col].getHSL());
+					// console.log('SCALE', scale, '[i]', i, '[col]', col);
+					// cubes[i][col].scale.z = (scale < 1 || isNaN(scale)) ? 1 : scale;
+					cubes[row][col].scale.z = (dataArray[z] / 10 < 1) ? 1 : dataArray[z] / 10;
+					// console.log('cube color before', cubes[i][col].material.color.r);
 					var red = scale * 50;
-					// cubes[i][j].material.color.r = Math.random() * dataArray[z] - 50;
-					// console.log('cube color after', cubes[i][j].material.color.r);
-					// cubes[i][j].material.color.g = Math.random() * dataArray[z] - 50;
-					// cubes[i][j].material.color.b = 10;
+					// cubes[i][col].material.color.r = Math.random() * dataArray[z] - 50;
+					// console.log('cube color after', cubes[i][col].material.color.r);
+					// cubes[i][col].material.color.g = Math.random() * dataArray[z] - 50;
+					// cubes[i][col].material.color.b = 10;
 
 				if(isNaN(k)){
 					k += 0;
