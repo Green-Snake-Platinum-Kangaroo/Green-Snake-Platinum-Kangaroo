@@ -16,10 +16,9 @@ var renderer = new THREE.WebGLRenderer({alpha:true});
 var camera = new THREE.PerspectiveCamera(view_angle, aspect, near, far);
 var scene = new THREE.Scene();
 
+// initial the boxes
 var cubes = [];
 var controls;
-
-
 
 var i = 0;
 for(var x = 0; x < 32; x += 2) {
@@ -42,8 +41,9 @@ for(var x = 0; x < 32; x += 2) {
 		scene.add(cubes[i][j]);
 		j++;
 	}
-	i++;
+	row++;
 }
+
   // create a point light
 var light = new THREE.AmbientLight(0x505050);
 scene.add(light);
@@ -119,7 +119,7 @@ var render = function () {
 renderer.setSize(width, height);
 
 // and make it pretty
-renderer.setClearColor(0xffffff, 1.0);
+renderer.setClearColor(0xffffff, 0.7);
 renderer.clear();
 
 render();

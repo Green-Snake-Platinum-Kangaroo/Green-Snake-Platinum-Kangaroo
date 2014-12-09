@@ -11,12 +11,10 @@ var interval = window.setInterval(function() {
 	}
 }, 500);
 
-
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 var analyser = audioCtx.createAnalyser();
 var audio  = document.querySelector('audio');
 audio.volume = 0.15;
-
 var source = audioCtx.createMediaElementSource(audio);
 source.connect(analyser);
 var gainNode = audioCtx.createGain();
