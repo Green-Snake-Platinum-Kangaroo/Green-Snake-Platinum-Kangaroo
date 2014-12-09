@@ -25,7 +25,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 	this.userPan = true;
 	this.userPanSpeed = 2.0;
 
-	this.autoRotate = true;
+	this.autoRotate = false;
 	this.autoRotateSpeed = 2.0; // 30 seconds per round when fps is 60
 
 	this.minPolarAngle = 0; // radians

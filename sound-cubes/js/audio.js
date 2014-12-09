@@ -4,7 +4,7 @@ var sourceJs;
 // var analyser;
 var buffer;
 // var url = 'data/cufool_you_in_my_world_instrumental.ogg';
-var array = new Array();
+// var array = new Array();
 var boost = 0;
 
 var interval = window.setInterval(function() {
@@ -52,7 +52,8 @@ var interval = window.setInterval(function() {
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 var analyser = audioCtx.createAnalyser();
 var audio  = document.querySelector('audio');
-console.log(audio);
+audio.volume = 0.15;
+// console.log(audio);
 var source = audioCtx.createMediaElementSource(audio);
 source.connect(analyser);
 //analyser.connect(distortion);
@@ -62,7 +63,6 @@ gainNode.connect(audioCtx.destination);
 // debugger;
 analyser.fftSize = 256;
 var bufferLength = analyser.frequencyBinCount;
-console.log(bufferLength);
 var dataArray = new Uint8Array(bufferLength);
 
 analyser.getFloatFrequencyData(dataArray);
