@@ -11,7 +11,7 @@ var far = 10000;
 // get the DOM element to attach to
 var $container = $('#container');
 
-  // create a WebGL renderer, camera and a scene
+// create a WebGL renderer, camera and a scene
 var renderer = new THREE.WebGLRenderer({alpha:true});
 var camera = new THREE.PerspectiveCamera(view_angle, aspect, near, far);
 var scene = new THREE.Scene();
@@ -20,6 +20,7 @@ var scene = new THREE.Scene();
 var cubes = [];
 var controls;
 
+// setup a t
 var row = 0;
 for(var x = 0; x < 32; x += 2) {
   var col = 0;
@@ -136,3 +137,30 @@ function randomFairColor() {
 	var b = (Math.floor(Math.random() * (max - min + 1)) + min);
 	return r + g + b;
 }
+
+
+// add stats for performance
+
+var stats = new Stats();
+stats.setMode(1); // 0: fps, 1: ms
+
+// align top-left
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.right = '0px';
+stats.domElement.style.top = '0px';
+
+document.body.appendChild( stats.domElement );
+
+var update = function () {
+
+    stats.begin();
+
+    // monitored code goes here
+
+    stats.end();
+
+    requestAnimationFrame( update );
+
+};
+
+requestAnimationFrame( update );
