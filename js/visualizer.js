@@ -136,3 +136,30 @@ function randomFairColor() {
 	var b = (Math.floor(Math.random() * (max - min + 1)) + min);
 	return r + g + b;
 }
+
+
+// add stats for performance
+
+var stats = new Stats();
+stats.setMode(1); // 0: fps, 1: ms
+
+// align top-left
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.right = '0px';
+stats.domElement.style.top = '0px';
+
+document.body.appendChild( stats.domElement );
+
+var update = function () {
+
+    stats.begin();
+
+    // monitored code goes here
+
+    stats.end();
+
+    requestAnimationFrame( update );
+
+};
+
+requestAnimationFrame( update );
