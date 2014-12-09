@@ -11,7 +11,7 @@ var far = 10000;
 // get the DOM element to attach to
 var $container = $('#container');
 
-  // create a WebGL renderer, camera and a scene
+// create a WebGL renderer, camera and a scene
 var renderer = new THREE.WebGLRenderer({alpha:true});
 var camera = new THREE.PerspectiveCamera(view_angle, aspect, near, far);
 var scene = new THREE.Scene();
@@ -20,6 +20,7 @@ var scene = new THREE.Scene();
 var cubes = [];
 var controls;
 
+// setup a t
 var row = 0;
 for(var x = 0; x < 32; x += 2) {
   var col = 0;
