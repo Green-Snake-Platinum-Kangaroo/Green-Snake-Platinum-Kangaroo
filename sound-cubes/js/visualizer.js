@@ -7,10 +7,10 @@ var controls;
 document.body.appendChild(renderer.domElement);
 
 var i = 0;
-for(var x = 0; x < 30; x += 2) {
+for(var x = 0; x < 32; x += 2) {
 	var j = 0;
 	cubes[i] = [];
-	for(var y = 0; y < 30; y += 2) {
+	for(var y = 0; y < 16; y += 2) {
 		var geometry = new THREE.CubeGeometry(2, 1.5, 6);
 
 		var material = new THREE.MeshPhongMaterial({
@@ -22,7 +22,8 @@ for(var x = 0; x < 30; x += 2) {
 		});
 
 		cubes[i][j] = new THREE.Mesh(geometry, material);
-		cubes[i][j].position = new THREE.Vector3(x, y, 0);
+		cubes[i][j].position = new THREE.Vector3(x, y + 10, 0);
+		cubes[i][j].setHSL(0.5,0.8,0.8);
 
 		scene.add(cubes[i][j]);
 		j++;
@@ -61,56 +62,45 @@ for(var i = 0; i < 7; i++) {
 }
 
 var render = function () {
-	// console.log(dataArray);
 	analyser.getByteFrequencyData(dataArray);
 	var zeros = Array.prototype.slice.call(dataArray);
 	zeros = zeros.reduce(function(a, b){ return a + b; });
-	// console.log('zeros', zeros, 'data array ',  dataArray, 'data array length', dataArray.length);
-	// if(!zeros){
-		
- //  }
 
 	if(typeof dataArray === 'object' && dataArray.length > 0 && zeros > 0) {
-		// debugger;
-		// console.log('make the blocks move');
-		// for (var i = 0; i < bufferLength; i++) {
-  //       boost += dataArray[i];
-  //       console.log('boost', boost / 1000);
-  //   }
-  //   
-
 		var k = 0;
-		for(var i = 0; i < cubes.length; i++) {
-			for(var j = 0; j < cubes[i].length; j++) {
-				boost += dataArray[i];
-				var scale = (dataArray[k] + boost) / 3000;
-				// console.log('SCALE', scale, '[i]', i, '[j]', j);
-				cubes[i][j].scale.z = (scale < 1 ? 1 : scale);
-				// console.log('cube color before', cubes[i][j].material.color.r);
-				var red = scale * 50;
-				// console.log('red', red);
-				// console.log('cube color before', cubes[i][j].material.color.r);
-				cubes[i][j].material.color.r = scale + 100;
-				// console.log('cube color after', cubes[i][j].material.color.r);
-				// cubes[i][j].material.color.g = 0;
-				// cubes[i][j].material.color.b = 0;
-				// if(k < dataArray.length){
-				// 	k += 1;
-				// }
-				debugger;
-				if(isNaN(k)){
-					k += 0;
-				}
-				k += (k < dataArray.length ? 1 : 0);
-			}
-    }
-    boost = boost / bufferLength;
-  }
+		var z = 127;
+		// console.log('max', Math.max.apply(null, dataArray));
+		// console.log('min', Math.min.apply(null, dataArray));
+			for(var i = 0; i < cubes.length; i++) {
+				for(var j = 0; j < cubes[i].length; j++) {
+					// console.log('z',dataArray[z]);
+					boost += dataArray[z];
+					var scale = (dataArray[k] + boost) / 3000;
+					// cubes[i][j].setHSL(dataArray[z] / 255, 0.8, 0.8);
+					console.log('hsl', cubes[i][j].material.getHSL());
+					// console.log('SCALE', scale, '[i]', i, '[j]', j);
+					// cubes[i][j].scale.z = (scale < 1 || isNaN(scale)) ? 1 : scale;
+					cubes[i][j].scale.z = (dataArray[z] / 10 < 1) ? 1 : dataArray[z] / 10;
+					// console.log('cube color before', cubes[i][j].material.color.r);
+					var red = scale * 50;
+					// cubes[i][j].material.color.r = Math.random() * dataArray[z] - 50;
+					// console.log('cube color after', cubes[i][j].material.color.r);
+					// cubes[i][j].material.color.g = Math.random() * dataArray[z] - 50;
+					// cubes[i][j].material.color.b = 10;
 
+					if(isNaN(k)){
+						k += 0;
+					}
+					k += (k < dataArray.length ? 1 : 0);
+					z--;
+				}
+	    }
+	  }
+    boost = boost / bufferLength;
 	requestAnimationFrame(render);
 	controls.update();
 	renderer.render(scene, camera);
-};
+}
 // console.log('data array', dataArray.length);
 render();
 renderer.setSize($(window).width(), $(window).height());
