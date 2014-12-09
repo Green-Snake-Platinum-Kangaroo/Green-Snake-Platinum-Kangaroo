@@ -1,55 +1,62 @@
-var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(50, $(window).width() / $(window).height(), 1, 1000);
+// Dimension Settings set the scene size
+var width = window.innerWidth;
+var height = window.innerHeight;
+
+// set some camera attributes
+var view_angle = 50;
+var aspect = width / height;
+var near = 1;
+var far = 10000;
+
+// get the DOM element to attach to
+var $container = $('#container');
+
+  // create a WebGL renderer, camera and a scene
 var renderer = new THREE.WebGLRenderer();
+var camera = new THREE.PerspectiveCamera(view_angle, aspect, near, far);
+var scene = new THREE.Scene();
+
 var cubes = [];
 var controls;
 
-document.body.appendChild(renderer.domElement);
+var material = new THREE.MeshLambertMaterial({color: 0xFFFFFF});
+
+var geometry = new THREE.CubeGeometry(2, 1.5, 6);
 
 var i = 0;
 for(var x = 0; x < 30; x += 2) {
 	var j = 0;
 	cubes[i] = [];
 	for(var y = 0; y < 30; y += 2) {
-		var geometry = new THREE.CubeGeometry(2, 1.5, 6);
-
-		var material = new THREE.MeshPhongMaterial({
-			color: randomFairColor(),
-			ambient: 0x808080,
-			specular: 0xffffff,
-			shininess: 20,
-			reflectivity: 5.5
-		});
-
 		cubes[i][j] = new THREE.Mesh(geometry, material);
 		cubes[i][j].position = new THREE.Vector3(x, y, 0);
-
 		scene.add(cubes[i][j]);
 		j++;
 	}
 	i++;
 }
-
-var light = new THREE.AmbientLight(0x505050);
+  // create a point light
+var light = new THREE.SpotLight(0xffffff);
 scene.add(light);
 
-var directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
-directionalLight.position.set(0, 1, 1);
-scene.add(directionalLight);
+var light = new THREE.SpotLight(0xffffff, 0.7);
+light.position.set(0, 1, 1);
+scene.add(light);
 
-directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
-directionalLight.position.set(1, 1, 0);
-scene.add(directionalLight);
+light = new THREE.SpotLight(0xffffff, 0.7);
+light.position.set(1, 1, 0);
+scene.add(light);
 
 
-directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
-directionalLight.position.set(0, -1, -1);
-scene.add(directionalLight);
+light = new THREE.SpotLight(0xffffff, 0.7);
+light.position.set(0, -1, -1);
+scene.add(light);
 
-directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
-directionalLight.position.set(-1, -1, 0);
-scene.add(directionalLight);
+light = new THREE.SpotLight(0xffffff, 0.7);
+light.position.set(-1, -1, 0);
+scene.add(light);
 
+ // set the camera position
 camera.position.z = 50;
 
 controls = new THREE.OrbitControls(camera);
@@ -61,43 +68,19 @@ for(var i = 0; i < 7; i++) {
 }
 
 var render = function () {
-	// console.log(dataArray);
 	analyser.getByteFrequencyData(dataArray);
 	var zeros = Array.prototype.slice.call(dataArray);
 	zeros = zeros.reduce(function(a, b){ return a + b; });
-	// console.log('zeros', zeros, 'data array ',  dataArray, 'data array length', dataArray.length);
-	// if(!zeros){
-		
- //  }
 
 	if(typeof dataArray === 'object' && dataArray.length > 0 && zeros > 0) {
-		// debugger;
-		// console.log('make the blocks move');
-		// for (var i = 0; i < bufferLength; i++) {
-  //       boost += dataArray[i];
-  //       console.log('boost', boost / 1000);
-  //   }
-  //   
-
 		var k = 0;
 		for(var i = 0; i < cubes.length; i++) {
 			for(var j = 0; j < cubes[i].length; j++) {
 				boost += dataArray[i];
 				var scale = (dataArray[k] + boost) / 3000;
-				// console.log('SCALE', scale, '[i]', i, '[j]', j);
 				cubes[i][j].scale.z = (scale < 1 ? 1 : scale);
-				// console.log('cube color before', cubes[i][j].material.color.r);
 				var red = scale * 50;
-				// console.log('red', red);
-				// console.log('cube color before', cubes[i][j].material.color.r);
 				cubes[i][j].material.color.r = scale + 100;
-				// console.log('cube color after', cubes[i][j].material.color.r);
-				// cubes[i][j].material.color.g = 0;
-				// cubes[i][j].material.color.b = 0;
-				// if(k < dataArray.length){
-				// 	k += 1;
-				// }
-				debugger;
 				if(isNaN(k)){
 					k += 0;
 				}
@@ -111,9 +94,18 @@ var render = function () {
 	controls.update();
 	renderer.render(scene, camera);
 };
-// console.log('data array', dataArray.length);
+
+  // start the renderer
+renderer.setSize(width, height);
+
+// and make it pretty
+renderer.setClearColor(0x555753, 1.0);
+renderer.clear();
+
 render();
-renderer.setSize($(window).width(), $(window).height());
+
+// attach the render-supplied DOM element
+$container.append(renderer.domElement);
 
 function randomFairColor() {
 	var min = 64;
