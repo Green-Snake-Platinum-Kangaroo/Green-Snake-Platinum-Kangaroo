@@ -1,5 +1,16 @@
+  // Dimension Settings set the scene size
+var width = window.innerWidth;
+var height = window.innerHeight;
+
+// set some camera attributes
+var view_angle = 45;
+var aspect = width / height;
+var near = 0.1;
+var far = 10000;
+
+
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(50, $(window).width() / $(window).height(), 1, 1000);
+var camera = new THREE.PerspectiveCamera(view_angle, $(window).width() / $(window).height(), 1, 1000);
 var renderer = new THREE.WebGLRenderer();
 var cubes = [];
 var controls;
@@ -79,7 +90,9 @@ var render = function () {
 };
 
 render();
-renderer.setSize($(window).width(), $(window).height());
+
+
+renderer.setSize(width, height);
 
 function randomFairColor() {
 	var min = 64;
