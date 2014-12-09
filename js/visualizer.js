@@ -16,33 +16,34 @@ var renderer = new THREE.WebGLRenderer({alpha:true});
 var camera = new THREE.PerspectiveCamera(view_angle, aspect, near, far);
 var scene = new THREE.Scene();
 
+// initial the boxes
 var cubes = [];
 var controls;
 
-
-
-var i = 0;
+var row = 0;
 for(var x = 0; x < 30; x += 2) {
-  var j = 0;
-  cubes[i] = [];
+  var col = 0;
+  cubes[row] = [];
   for(var y = 0; y < 30; y += 2) {
     var geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
     var material = new THREE.MeshPhongMaterial({
       color: randomFairColor(),
       ambient: 0x808080,
-      specular: 0xffffff,
-      shininess: 20,
-      reflectivity: 5.5
+      specular: 0x999999,
+      shininess: 100,
+      opacity:0.8,
+      transparent: true
     });
-		cubes[i][j] = new THREE.Mesh(geometry, material);
-		cubes[i][j].position.x = x;
-    cubes[i][j].position.y = y;
-    cubes[i][j].position.z = 0;
-		scene.add(cubes[i][j]);
-		j++;
+		cubes[row][col] = new THREE.Mesh(geometry, material);
+		cubes[row][col].position.x = x;
+    cubes[row][col].position.y = y;
+    cubes[row][col].position.z = 0;
+		scene.add(cubes[row][col]);
+		col++;
 	}
-	i++;
+	row++;
 }
+
   // create a point light
 var light = new THREE.DirectionalLight(0xffffff);
 scene.add(light);
@@ -82,13 +83,12 @@ var render = function () {
 
 	if(typeof dataArray === 'object' && dataArray.length > 0 && zeros > 0) {
 		var k = 0;
-		for(var i = 0; i < cubes.length; i++) {
-			for(var j = 0; j < cubes[i].length; j++) {
-				boost += dataArray[i];
-				var scale = (dataArray[k] + boost) / 3000;
-				cubes[i][j].scale.z = (scale < 1 ? 1 : scale);
-				// var red = scale * 50;
-				// cubes[i][j].material.color.r = scale + 100;
+		for(var row = 0; row < cubes.length; row++) {
+			for(var col = 0; col < cubes[row].length; col++) {
+				boost += dataArray[row];
+				var scale = (dataArray[k] + boost) / 5000;
+				cubes[row][col].scale.z = (scale < 1 ? 1 : scale);
+				cubes[row][col].material.color.r = scale;
 				if(isNaN(k)){
 					k += 0;
 				}
@@ -107,7 +107,7 @@ var render = function () {
 renderer.setSize(width, height);
 
 // and make it pretty
-renderer.setClearColor(0xffffff, 1.0);
+renderer.setClearColor(0xffffff, 0.7);
 renderer.clear();
 
 render();
