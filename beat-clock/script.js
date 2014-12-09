@@ -55,7 +55,7 @@ $(document).ready(function () {
   dial.position.y   = -3;
   dial.position.z   = 0;
 
-  mark1.position.x   = 0;
+  mark1.position.x   = -36;
   mark1.position.y   = 0;
   mark1.position.z   = 0;
 
@@ -63,7 +63,7 @@ $(document).ready(function () {
   mark2.position.y   = 0;
   mark2.position.z   = -18;
 
-  mark3.position.x   = -36;
+  mark3.position.x   = 0;
   mark3.position.y   = 0;
   mark3.position.z   = 0;
 
@@ -154,21 +154,62 @@ $(document).ready(function () {
 
   
   // Animation Tween
-  var rotation_start = {angle: now.getSeconds() };
-  var rotation_end   = {angle: rotation_start.angle + 1 };
+  var rotation_start = { angle: now.getSeconds() };
+  var rotation_end   = { angle: rotation_start.angle + 1 };
   
   // dataset on hand object? or attribute directly?
   var tween1 = new TWEEN.Tween( rotation_start ).to( rotation_end, 1000 )
-            .easing(TWEEN.Easing.Elastic.InOut)
+            //.easing(TWEEN.Easing.Elastic.InOut)
             //.repeat( Infinity ) couldnt get this to fire 'on complete' to change values.
             .delay( 0 )
             .onUpdate( function() {
               second.rotation.y = -((Math.PI * 2) * (this.angle / 4.0));
+              // [pos1, 2, 3, 4]
+              var modulo = (Math.floor(this.angle));
+              debugger;
+              // based on modulo
+                // set all marks to 0
+                // invoke the position.y for that mark[i] = 30;
+
+              if(Math.floor(this.angle) % 4 === 3){
+                console.log('this angle', Math.floor(this.angle));
+                mark1.position.y = 0;
+                mark2.position.y = 30;
+                mark3.position.y = 0;
+                mark4.position.y = 0;
+              }
+              if(Math.floor(this.angle) % 4 === 2){
+                console.log('this angle', Math.floor(this.angle));
+                mark1.position.y = 30;
+                mark2.position.y = 0;
+                mark3.position.y = 0;
+                mark4.position.y = 0;
+              }
+              if(Math.floor(this.angle) % 4 === 1){
+                mark1.position.y = 0;
+                mark2.position.y = 0;
+                mark3.position.y = 0;
+                mark4.position.y = 30;
+              }
+              if(Math.floor(this.angle) % 4 === 0){
+                console.log('this angle', Math.floor(this.angle));
+                mark1.position.y = 0;
+                mark2.position.y = 0;
+                mark3.position.y = 30;
+                mark4.position.y = 0;
+              }
+              
+              // console.log('second rotation', second.rotation.y);
+              // mark1.position.y = 0;
+              // console.log('mark1 position', mark1.position.y);
 
             })
             .onComplete( function() {
               rotation_start.angle = new Date().getSeconds();
               rotation_end.angle   = rotation_start.angle + 1;
+              // console.log('onComplete fired');
+              
+              // console.log('mark1 onComplete position', mark1.position.y);
               
               // TODO fire off hour/minute animations here?
             })
