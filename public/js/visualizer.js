@@ -126,21 +126,11 @@ render();
 // attach the render-supplied DOM element
 $container.append(renderer.domElement);
 
-// Originally used for cube created. Not currently being used
-function randomFairColor() {
-	var min = 64;
-	var max = 224;
-	var r = (Math.floor(Math.random() * (max - min + 1)) + min) * 65536;
-	var g = (Math.floor(Math.random() * (max - min + 1)) + min) * 256;
-	var b = (Math.floor(Math.random() * (max - min + 1)) + min);
-	return r + g + b;
-}
-
 
 // add stats for performance
 
 var stats = new Stats();
-stats.setMode(1); // 0: fps, 1: ms
+stats.setMode(0); // 0: fps, 1: ms
 
 // align top-left
 stats.domElement.style.position = 'absolute';
@@ -151,18 +141,17 @@ document.body.appendChild( stats.domElement );
 
 // Is this actually checking the render function?
 var update = function () {
-    stats.begin();
-    // monitored code goes here
-    stats.end();
-    requestAnimationFrame( update );
+  stats.begin();
+  // monitored code goes here
+  stats.end();
+  requestAnimationFrame( update );
 };
 
 requestAnimationFrame( update );
 
 // create dat.gui for variables control
-window.onload = function() {
-  var canvas = renderer.domElement;
-  var gui = new dat.GUI();
-  gui.add(canvas, 'width', 800, 1200);
-  gui.add(canvas, 'height', 500, 700);
-};
+
+var canvas = renderer.domElement;
+var gui = new dat.GUI();
+gui.add(canvas, 'width', 800, 1200);
+gui.add(canvas, 'height', 800, 1200);
