@@ -35,6 +35,7 @@ From within the root directory:
 ```sh
 bower install jquery
 bower install threejs
+node app.js
 ```
 
 ### Roadmap
