@@ -20,7 +20,7 @@ var scene = new THREE.Scene();
 var cubes = [];
 var controls;
 
-// setup a t
+// setup 8 rows with 16 columns cubes
 var row = 0;
 for(var x = 0; x < 32; x += 2) {
   var col = 0;
@@ -46,11 +46,11 @@ for(var x = 0; x < 32; x += 2) {
 	row++;
 }
 
-  // create a point light
+  // create a lighting
 var light = new THREE.AmbientLight(0x505050);
 scene.add(light);
 
-var light = new THREE.DirectionalLight(0xffffff, 0.7);
+light = new THREE.DirectionalLight(0xffffff, 0.7);
 light.position.set(0, 1, 1);
 scene.add(light);
 
