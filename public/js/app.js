@@ -10,5 +10,11 @@ $('#box').click(function(){
 })
 
 $("#load").click(function(){
-  $('audio').attr("src", $("#link").val())
+  var dest = $("#link").val()
+  if ( dest === "who") {
+    $('audio').attr("src", 'sounds/doctor_who_theme_full.mp3');
+  } else {
+    $('audio').attr("src", $("#link").val());
+  }
+  
 });
