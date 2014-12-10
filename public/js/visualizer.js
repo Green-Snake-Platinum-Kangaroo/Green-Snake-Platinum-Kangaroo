@@ -16,16 +16,17 @@ var renderer = new THREE.WebGLRenderer({alpha:true});
 var camera = new THREE.PerspectiveCamera(view_angle, aspect, near, far);
 var scene = new THREE.Scene();
 
-// initial the boxes
+// initialize
 var cubes = [];
 var controls;
 
-// setup 8 rows with 16 columns cubes
+
+// setup the grid with 8 rows with 16 columns cubes
 var row = 0;
 for(var x = 0; x < 32; x += 2) {
   var col = 0;
   cubes[row] = [];
-  for(var y = 0; y < 16; y += 2) {
+  for(var y = 8; y < 24; y += 2) {
     var geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
     var material = new THREE.MeshLambertMaterial({
       // color: {},
@@ -46,7 +47,7 @@ for(var x = 0; x < 32; x += 2) {
 	row++;
 }
 
-  // create a lighting
+// create lighting
 var light = new THREE.AmbientLight(0x505050);
 scene.add(light);
 
@@ -58,7 +59,6 @@ light = new THREE.DirectionalLight(0xffffff, 0.7);
 light.position.set(1, 1, 0);
 scene.add(light);
 
-
 light = new THREE.DirectionalLight(0xffffff, 0.7);
 light.position.set(0, -1, -1);
 scene.add(light);
@@ -67,7 +67,7 @@ light = new THREE.DirectionalLight(0xffffff, 0.7);
 light.position.set(-1, -1, 0);
 scene.add(light);
 
- // set the camera position
+// set the camera position
 camera.position.z = 50;
 
 controls = new THREE.OrbitControls(camera);
@@ -78,20 +78,23 @@ for(var i = 0; i < 7; i++) {
 	controls.pan(new THREE.Vector3( 0, 1, 0 ));
 }
 
+// Makes the cubes change shape and color
 var updateCubes = function(){
+
+  // check if the dataArray (audio buffer) is empty
   var zeros = Array.prototype.slice.call(dataArray);
   zeros = zeros.reduce(function(a, b){ return a + b; });
 
+  // don't do anything to the cubest if the dataArray is empty
   if(typeof dataArray === 'object' && dataArray.length > 0 && zeros > 0) {
-    var k = 0;
     var z = 127;
     for(var row = 0; row < cubes.length; row++) {
       for(var col = 0; col < cubes[row].length; col++) {
         boost += dataArray[z];
-        var scale = (dataArray[k] + boost) / 3000;
+        var scale = (dataArray[z] / 10 < 1) ? 1 : dataArray[z] / 10;
+        // console.log('scale', scale);
         cubes[row][col].material.color.setHSL(dataArray[z] / 255, 0.8, 0.8);
-        cubes[row][col].scale.z = (dataArray[z] / 10 < 1) ? 1 : dataArray[z] / 10;
-        k += (k < dataArray.length ? 1 : 0);
+        cubes[row][col].scale.z = scale;
         z--;
       }
     }
@@ -103,10 +106,13 @@ var updateCubes = function(){
 var render = function () {
   // reloads the fft data
 	analyser.getByteFrequencyData(dataArray);
-  requestAnimationFrame(render);
+
   updateCubes();
-	controls.update();
-	renderer.render(scene, camera);
+  controls.update();
+  renderer.render(scene, camera);
+
+  // invokes render again
+  requestAnimationFrame(render);
 };
 
 // start the renderer
