@@ -33,8 +33,8 @@
 From within the root directory:
 
 ```sh
-bower install jquery
-bower install threejs
+bower install
+npm install
 node app.js
 ```
 

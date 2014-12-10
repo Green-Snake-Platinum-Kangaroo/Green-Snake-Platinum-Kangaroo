@@ -1,0 +1,30 @@
+{
+  "name": "Green-Snake-Platinum-Kangaroo",
+  "main": "index.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/victorleungtw/Green-Snake-Platinum-Kangaroo",
+  "authors": [
+    "Nic Mitchell",
+    "Pactric McPike",
+    "Victor Leung"
+  ],
+  "description": "A sound visualizer in Web Audio API and WebGL",
+  "keywords": [
+    "music",
+    "sound",
+    "visualizer",
+    "threejs"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "threejs": "*"
+  }
+}
