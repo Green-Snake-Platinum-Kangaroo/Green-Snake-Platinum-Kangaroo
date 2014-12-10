@@ -39,7 +39,7 @@ for(var x = 0; x < 32; x += 2) {
 		cubes[row][col].position.x = x;
     cubes[row][col].position.y = y;
     cubes[row][col].position.z = 0;
-    cubes[row][col].material.color.setHSL(0.5,0.8,0.8);
+    cubes[row][col].material.color.setHSL(0.0,0.8,0.8);
 		scene.add(cubes[row][col]);
 		col++;
 	}
@@ -91,13 +91,15 @@ var updateCubes = function(){
     for(var row = 8, rowLength = cubes.length; row < rowLength; row++) {
       for(var col = 0, colLength = cubes[row].length; col < colLength; col++) {
         var scale = (dataArray[z] / 10 < 1) ? 1 : dataArray[z] / 10;
-        var hue = dataArray[z] / 255;
+        var data = dataArray[z] / 255;
         var rowShift = row - offset;
 
-        cubes[row][col].material.color.setHSL(hue, 0.8, 0.8);
+        cubes[row][col].material.color.setHSL(data, 0.8, 0.5);
+        cubes[row][col].material.opacity = data * 10;
         cubes[row][col].scale.z = scale;
-        cubes[rowShift][col].material.color.setHSL(hue, 0.8, 0.8);
+        cubes[rowShift][col].material.color.setHSL(Math.abs(data - 1), 0.8, 0.5);
         cubes[rowShift][col].scale.z = scale;
+        cubes[rowShift][col].material.opacity = data * 10;
         z++;
       }
       offset += 2;
