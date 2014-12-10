@@ -2,7 +2,7 @@
   "name": "Green-Snake-Platinum-Kangaroo",
   "version": "1.0.0",
   "description": "A sound visualizer in Web Audio API and WebGL",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
