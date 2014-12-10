@@ -80,12 +80,12 @@ for(var i = 0; i < 7; i++) {
 
 // Makes the cubes change shape and color
 var updateCubes = function(){
-
+  var boost;
   // check if the dataArray (audio buffer) is empty
   var zeros = Array.prototype.slice.call(dataArray);
   zeros = zeros.reduce(function(a, b){ return a + b; });
 
-  // don't do anything to the cubest if the dataArray is empty
+  // don't do anything to the cubes if the dataArray is empty
   if(typeof dataArray === 'object' && dataArray.length > 0 && zeros > 0) {
     var z = 127;
     for(var row = 0; row < cubes.length; row++) {
