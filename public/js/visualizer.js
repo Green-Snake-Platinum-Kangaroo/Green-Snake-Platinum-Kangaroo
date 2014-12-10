@@ -86,19 +86,23 @@ var updateCubes = function(){
 
   // don't do anything to the cubes if the dataArray is empty
   if(typeof dataArray === 'object' && dataArray.length > 0 && zeros > 0) {
-    var z = 127;
-    for(var row = 0; row < cubes.length; row++) {
-      for(var col = 0; col < cubes[row].length; col++) {
-        boost += dataArray[z];
+    var z = 0;
+    var offset = 1;
+    for(var row = 8, rowLength = cubes.length; row < rowLength; row++) {
+      for(var col = 0, colLength = cubes[row].length; col < colLength; col++) {
         var scale = (dataArray[z] / 10 < 1) ? 1 : dataArray[z] / 10;
-        // console.log('scale', scale);
-        cubes[row][col].material.color.setHSL(dataArray[z] / 255, 0.8, 0.8);
+        var hue = dataArray[z] / 255;
+        var rowShift = row - offset;
+
+        cubes[row][col].material.color.setHSL(hue, 0.8, 0.8);
         cubes[row][col].scale.z = scale;
-        z--;
+        cubes[rowShift][col].material.color.setHSL(hue, 0.8, 0.8);
+        cubes[rowShift][col].scale.z = scale;
+        z++;
       }
+      offset += 2;
     }
   }
-  boost = boost / bufferLength;
 };
 
 // Updates the visualizer
