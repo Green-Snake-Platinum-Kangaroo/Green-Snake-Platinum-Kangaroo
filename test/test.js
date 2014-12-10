@@ -11,3 +11,7 @@ describe('GET /', function(){
       .expect(200, done);
   });
 });
+
+describe('it should load visualizer on page load', function(){
+  var
+})
