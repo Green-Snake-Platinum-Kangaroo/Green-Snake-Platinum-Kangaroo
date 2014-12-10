@@ -13,10 +13,6 @@
 
 */
 
-var sourceJs;
-var buffer;
-var boost = 0;
-
 
 // 1. Create audio context, see: https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -40,7 +36,3 @@ source.connect(analyser);
 analyser.fftSize = 256;
 var bufferLength = analyser.frequencyBinCount;
 var dataArray = new Uint8Array(bufferLength);
-
-analyser.getFloatFrequencyData(dataArray);
-
-
