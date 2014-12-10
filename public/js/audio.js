@@ -25,14 +25,13 @@ var source = audioCtx.createMediaElementSource(audio);
 // 3. Create effects nodes
 var analyser = audioCtx.createAnalyser();
 
-
 // 4. Choose final destination of audio
 analyser.connect(audioCtx.destination);
 
 // 5. Connect the sources up to the effects
 source.connect(analyser);
 
-
 analyser.fftSize = 256;
 var bufferLength = analyser.frequencyBinCount;
 var dataArray = new Uint8Array(bufferLength);
+var timeDomain = new Uint8Array(bufferLength);
