@@ -79,7 +79,10 @@ for(var i = 0; i < 7; i++) {
 
 // Makes the cubes change shape and color
 var updateCubes = function(){
-  var boost;
+  // reloads the fft data
+  analyser.getByteFrequencyData(dataArray);
+  analyser.getByteTimeDomainData(timeDomain);
+
   // check if the dataArray (audio buffer) is empty
   var zeros = Array.prototype.slice.call(dataArray);
   zeros = zeros.reduce(function(a, b){ return a + b; });
@@ -94,9 +97,12 @@ var updateCubes = function(){
         var data = dataArray[z] / 255;
         var rowShift = row - offset;
 
+        // right side
         cubes[row][col].material.color.setHSL(data, 0.8, 0.5);
-        cubes[row][col].material.opacity = data * 10;
         cubes[row][col].scale.z = scale;
+        cubes[row][col].material.opacity = data * 10;
+
+        // left side
         cubes[rowShift][col].material.color.setHSL(Math.abs(data - 1), 0.8, 0.5);
         cubes[rowShift][col].scale.z = scale;
         cubes[rowShift][col].material.opacity = data * 10;
@@ -109,8 +115,8 @@ var updateCubes = function(){
 
 // Updates the visualizer
 var render = function () {
-  // reloads the fft data
-	analyser.getByteFrequencyData(dataArray);
+  
+	
 
   updateCubes();
   controls.update();
