@@ -78,46 +78,38 @@ for(var i = 0; i < 7; i++) {
 	controls.pan(new THREE.Vector3( 0, 1, 0 ));
 }
 
-var render = function () {
-	analyser.getByteFrequencyData(dataArray);
-	var zeros = Array.prototype.slice.call(dataArray);
-	zeros = zeros.reduce(function(a, b){ return a + b; });
+var updateCubes = function(){
+  var zeros = Array.prototype.slice.call(dataArray);
+  zeros = zeros.reduce(function(a, b){ return a + b; });
 
-	if(typeof dataArray === 'object' && dataArray.length > 0 && zeros > 0) {
-		var k = 0;
-		var z = 127;
-		for(var row = 0; row < cubes.length; row++) {
-			for(var col = 0; col < cubes[row].length; col++) {
-				// console.log('z',dataArray[z]);
-				boost += dataArray[z];
-				var scale = (dataArray[k] + boost) / 3000;
-					cubes[row][col].material.color.setHSL(dataArray[z] / 255, 0.8, 0.8);
-					// console.log('hsl', cubes[i][col].getHSL());
-					// console.log('SCALE', scale, '[i]', i, '[col]', col);
-					// cubes[i][col].scale.z = (scale < 1 || isNaN(scale)) ? 1 : scale;
-					cubes[row][col].scale.z = (dataArray[z] / 10 < 1) ? 1 : dataArray[z] / 10;
-					// console.log('cube color before', cubes[i][col].material.color.r);
-					var red = scale * 50;
-					// cubes[i][col].material.color.r = Math.random() * dataArray[z] - 50;
-					// console.log('cube color after', cubes[i][col].material.color.r);
-					// cubes[i][col].material.color.g = Math.random() * dataArray[z] - 50;
-					// cubes[i][col].material.color.b = 10;
-
-				if(isNaN(k)){
-					k += 0;
-				}
-				k += (k < dataArray.length ? 1 : 0);
-					z--;
-				}
-			}
+  if(typeof dataArray === 'object' && dataArray.length > 0 && zeros > 0) {
+    var k = 0;
+    var z = 127;
+    for(var row = 0; row < cubes.length; row++) {
+      for(var col = 0; col < cubes[row].length; col++) {
+        boost += dataArray[z];
+        var scale = (dataArray[k] + boost) / 3000;
+        cubes[row][col].material.color.setHSL(dataArray[z] / 255, 0.8, 0.8);
+        cubes[row][col].scale.z = (dataArray[z] / 10 < 1) ? 1 : dataArray[z] / 10;
+        k += (k < dataArray.length ? 1 : 0);
+        z--;
+      }
     }
-    boost = boost / bufferLength;
-	requestAnimationFrame(render);
+  }
+  boost = boost / bufferLength;
+};
+
+// Updates the visualizer
+var render = function () {
+  // reloads the fft data
+	analyser.getByteFrequencyData(dataArray);
+  requestAnimationFrame(render);
+  updateCubes();
 	controls.update();
 	renderer.render(scene, camera);
 };
 
-  // start the renderer
+// start the renderer
 renderer.setSize(width, height);
 
 // and make it pretty
@@ -129,6 +121,7 @@ render();
 // attach the render-supplied DOM element
 $container.append(renderer.domElement);
 
+// Originally used for cube created. Not currently being used
 function randomFairColor() {
 	var min = 64;
 	var max = 224;
@@ -151,16 +144,12 @@ stats.domElement.style.top = '0px';
 
 document.body.appendChild( stats.domElement );
 
+// Is this actually checking the render function?
 var update = function () {
-
     stats.begin();
-
     // monitored code goes here
-
     stats.end();
-
     requestAnimationFrame( update );
-
 };
 
 requestAnimationFrame( update );
