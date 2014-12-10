@@ -15,12 +15,11 @@ var $container = $('#container');
 var renderer = new THREE.WebGLRenderer({alpha:true});
 var camera = new THREE.PerspectiveCamera(view_angle, aspect, near, far);
 var scene = new THREE.Scene();
-renderer.domElement.id = "container"
+renderer.domElement.id = "container";
 
 // initialize
 var cubes = [];
 var controls;
-
 
 // setup the grid with 8 rows with 16 columns cubes
 var row = 0;
@@ -30,7 +29,6 @@ for(var x = 0; x < 32; x += 2) {
   for(var y = 8; y < 24; y += 2) {
     var geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
     var material = new THREE.MeshLambertMaterial({
-      // color: {},
       ambient: 0x808080,
       specular: 0x999999,
       shininess: 100,
@@ -147,7 +145,7 @@ stats.setMode(1); // 0: fps, 1: ms
 // align top-left
 stats.domElement.style.position = 'absolute';
 stats.domElement.style.right = '0px';
-stats.domElement.style.top = '0px';
+stats.domElement.style.bottom = '0px';
 
 document.body.appendChild( stats.domElement );
 
@@ -160,3 +158,11 @@ var update = function () {
 };
 
 requestAnimationFrame( update );
+
+// create dat.gui for variables control
+window.onload = function() {
+  var canvas = renderer.domElement;
+  var gui = new dat.GUI();
+  gui.add(canvas, 'width', 800, 1200);
+  gui.add(canvas, 'height', 500, 700);
+};
