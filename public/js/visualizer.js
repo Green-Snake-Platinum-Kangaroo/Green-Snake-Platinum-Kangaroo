@@ -15,6 +15,7 @@ var $container = $('#container');
 var renderer = new THREE.WebGLRenderer({alpha:true});
 var camera = new THREE.PerspectiveCamera(view_angle, aspect, near, far);
 var scene = new THREE.Scene();
+renderer.domElement.id = "container"
 
 // initialize
 var cubes = [];
@@ -70,8 +71,8 @@ scene.add(light);
 // set the camera position
 camera.position.z = 50;
 
-controls = new THREE.OrbitControls(camera);
-controls.addEventListener('change', render);
+controls = new THREE.OrbitControls(camera, renderer.domElement);
+// controls.addEventListener('change', render);
 
 for(var i = 0; i < 7; i++) {
 	controls.pan(new THREE.Vector3( 1, 0, 0 ));
