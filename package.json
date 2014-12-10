@@ -17,7 +17,7 @@
     "visualizer",
     "threejs"
   ],
-  "author": "Nic Mitchell, Pactric McPike, Victor Leung",
+  "author": "Nic Mitchell, Pactrick McPike, Victor Leung",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/victorleungtw/Green-Snake-Platinum-Kangaroo/issues"
@@ -38,6 +38,9 @@
     "karma-chrome-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.2",
     "grunt": "~0.4.5",
-    "grunt-contrib-uglify": "~0.6.0"
+    "grunt-contrib-uglify": "~0.6.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-concat": "~0.5.0",
+    "grunt-contrib-jshint": "~0.10.0"
   }
 }
