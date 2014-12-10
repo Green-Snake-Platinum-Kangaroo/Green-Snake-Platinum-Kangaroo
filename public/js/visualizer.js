@@ -96,7 +96,7 @@ var updateCubes = function(){
 
         cubes[row][col].material.color.setHSL(hue, 0.8, 0.8);
         cubes[row][col].scale.z = scale;
-        cubes[rowShift][col].material.color.setHSL(hue, 0.8, 0.8);
+        cubes[rowShift][col].material.color.setHSL(Math.abs(hue - 1), 0.8, 0.8);
         cubes[rowShift][col].scale.z = scale;
         z++;
       }
