@@ -30,6 +30,5 @@
   },
   "_source": "git://github.com/mrdoob/three.js.git",
   "_target": "*",
-  "_originalSource": "threejs",
-  "_direct": true
+  "_originalSource": "threejs"
 }

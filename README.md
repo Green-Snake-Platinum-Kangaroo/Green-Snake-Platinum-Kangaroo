@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: Nic Mitchell
-  - __Scrum Master__: Pactric McPike
-  - __Development Team Members__: Victor Leung
+  - __Product Owner__: [Nic Mitchell](https://github.com/nicmitchell)
+  - __Scrum Master__: [Pactric McPike](https://github.com/mcpike)
+  - __Development Team Members__: [Victor Leung](https://github.com/victorleungtw)
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@
 
 ## Usage
 
-> Some usage instructions
+> For demo, please visit: [https://pacific-refuge-1175.herokuapp.com/](https://pacific-refuge-1175.herokuapp.com/)
 
 ## Requirements
 
@@ -33,8 +33,8 @@
 From within the root directory:
 
 ```sh
-bower install jquery
-bower install threejs
+bower install
+npm install
 node app.js
 ```
 
