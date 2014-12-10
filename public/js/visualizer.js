@@ -161,9 +161,8 @@ requestAnimationFrame( update );
 
 // create dat.gui for variables control
 window.onload = function() {
-  var text = new FizzyText();
+  var canvas = renderer.domElement;
   var gui = new dat.GUI();
-  gui.add(text, 'message');
-  gui.add(text, 'speed', -5, 5);
-  gui.add(text, 'displayOutline');
+  gui.add(canvas, 'width', 800, 1200);
+  gui.add(canvas, 'height', 500, 700);
 };
