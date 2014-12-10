@@ -25,7 +25,7 @@ var row = 0;
 for(var x = 0; x < 32; x += 2) {
   var col = 0;
   cubes[row] = [];
-  for(var y = 0; y < 16; y += 2) {
+  for(var y = 8; y < 24; y += 2) {
     var geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
     var material = new THREE.MeshLambertMaterial({
       // color: {},
@@ -91,7 +91,7 @@ var updateCubes = function(){
       for(var col = 0; col < cubes[row].length; col++) {
         boost += dataArray[z];
         var scale = (dataArray[z] / 10 < 1) ? 1 : dataArray[z] / 10;
-        console.log('scale', scale);
+        // console.log('scale', scale);
         cubes[row][col].material.color.setHSL(dataArray[z] / 255, 0.8, 0.8);
         cubes[row][col].scale.z = scale;
         z--;
@@ -105,10 +105,13 @@ var updateCubes = function(){
 var render = function () {
   // reloads the fft data
 	analyser.getByteFrequencyData(dataArray);
-  requestAnimationFrame(render);
+
   updateCubes();
-	controls.update();
-	renderer.render(scene, camera);
+  controls.update();
+  renderer.render(scene, camera);
+
+  // invokes render again
+  requestAnimationFrame(render);
 };
 
 // start the renderer
