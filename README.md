@@ -5,7 +5,7 @@
 ## Team
 
   - __Product Owner__: [Nic Mitchell](https://github.com/nicmitchell)
-  - __Scrum Master__: [Pactric McPike](https://github.com/mcpike)
+  - __Scrum Master__: [Pactrick McPike](https://github.com/mcpike)
   - __Development Team Members__: [Victor Leung](https://github.com/victorleungtw)
 
 ## Table of Contents
