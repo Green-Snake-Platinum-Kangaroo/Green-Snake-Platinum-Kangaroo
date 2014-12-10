@@ -4,7 +4,8 @@
   "description": "A sound visualizer in Web Audio API and WebGL",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,9 @@
     "express": "^4.10.4",
     "fs": "0.0.2",
     "path": "^0.4.9"
-  }
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "license": "MIT"
 }
