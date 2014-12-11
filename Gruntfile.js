@@ -30,7 +30,7 @@ module.exports = function(grunt){
     concat: {
       js: {
         src: [
-          'dev/js/*'
+          'dev/js/*.js'
         ],
         dest: 
           'dev/tmp/single.js'
@@ -58,7 +58,7 @@ module.exports = function(grunt){
     },
     watch: {
       scripts: {
-        files: ['src/js/*.js'],
+        files: ['dev/js/*.js'],
         tasks: ['default'],
         options: {
           spawn: false,
