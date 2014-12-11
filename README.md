@@ -20,7 +20,7 @@
 
 ## Usage
 
-> For demo, please visit: [https://pacific-refuge-1175.herokuapp.com/](https://pacific-refuge-1175.herokuapp.com/)
+> For demo, please visit: [https://green-snake-platinum-kangaroo.herokuapp.com/](https://green-snake-platinum-kangaroo.herokuapp.com/)
 
 ## Requirements
 
