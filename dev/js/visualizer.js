@@ -115,8 +115,8 @@ var updateCubes = function(){
 
 // Updates the visualizer
 var render = function () {
-  
-	
+
+
 
   updateCubes();
   controls.update();
@@ -176,5 +176,5 @@ window.onload = function() {
   var canvas = renderer.domElement;
   var gui = new dat.GUI();
   gui.add(canvas, 'width', 800, 1200);
-  gui.add(canvas, 'height', 500, 700);
+  gui.add(canvas, 'height', 800, 1200);
 };
