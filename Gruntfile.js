@@ -126,31 +126,6 @@ module.exports = function(grunt){
       }
     },
 
-    // configure karma
-    karma: {
-      options: {
-        configFile: 'karma.conf.js',
-        reporters: ['progress', 'coverage']
-      },
-      // Watch configuration
-      watch: {
-        background: true,
-        reporters: ['progress']
-      },
-      // Single-run configuration for development
-      single: {
-        singleRun: true,
-      },
-      // Single-run configuration for CI
-      ci: {
-        singleRun: true,
-        coverageReporter: {
-          type: 'lcov',
-          dir: 'results/coverage/'
-        }
-      }
-    },
-
     // configure casperjs
     casperjs: {
       options: {},
