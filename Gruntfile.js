@@ -62,10 +62,10 @@ module.exports = function(grunt){
 
     karma: {
       unit: {
-        configFile: './karma.config.js'
+        configFile: './karma.conf.js'
       },
       watch: {
-        configFile: './karma.config.js',
+        configFile: './karma.conf.js',
         autoWatch: true
       }
     },
