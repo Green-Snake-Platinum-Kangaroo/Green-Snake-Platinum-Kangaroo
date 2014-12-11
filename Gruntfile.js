@@ -36,6 +36,11 @@ module.exports = function(grunt){
           'dev/tmp/single.js'
       }
     },
+    karma: {
+      unit: {
+        configFile: './karma.config.js'
+      }
+    },
     uglify: {
       scripts: {
         options: {
@@ -71,6 +76,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('default', ['concat:js', 'uglify:scripts']);
 
