@@ -544,6 +544,20 @@ $("#load").click(function(){
 });
 // end
 
+
+
+// a checkbox to provide the option to loop the audio
+$('#loop').click(function(){
+   var isChecked = $('#loop').prop('checked');
+   if (isChecked) {
+    $('audio').attr("loop", true);
+   } else {
+    $('audio').attr("loop", false);
+   }
+});
+
+
+
 /*
 	The following section is the setup for routing Audio to the visualizer:
 
