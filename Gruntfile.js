@@ -59,6 +59,17 @@ module.exports = function(grunt){
       }
     },
 
+
+    karma: {
+      unit: {
+        configFile: './karma.config.js'
+      },
+      watch: {
+        configFile: './karma.config.js',
+        autoWatch: true
+      }
+    },
+
      // uglify the files
     uglify: {
       scripts: {
