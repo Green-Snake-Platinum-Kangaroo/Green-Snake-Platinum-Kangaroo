@@ -35,7 +35,7 @@ From within the root directory:
 ```sh
 bower install
 npm install
-node app.js
+npm start
 ```
 
 ### Roadmap
