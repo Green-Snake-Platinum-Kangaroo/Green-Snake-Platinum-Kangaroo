@@ -1,7 +1,7 @@
 var request = require('supertest');
 var express = require('express');
 
-var app = require("../index").getApp;
+var app = require("../../index").getApp;
 
 describe('GET /', function(){
   it('respond with index html page', function(done){
@@ -11,7 +11,3 @@ describe('GET /', function(){
       .expect(200, done);
   });
 });
-
-describe('it should load visualizer on page load', function(){
-  var
-})
